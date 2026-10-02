@@ -1,23 +1,15 @@
 import { Button } from '@/components/ui/Button'
 import { Input, Label } from '@/components/ui/Input'
 import { useAuth } from '@/hooks/useAuth'
-import type { Role } from '@/types'
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { toast } from 'sonner'
-
-const roles: Role[] = [
-  'Principal Investigator',
-  'Study Coordinator',
-  'Administrator',
-]
 
 export function LoginPage() {
   const { user, login } = useAuth()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState<Role>('Principal Investigator')
 
   if (user) return <Navigate to="/dashboard" replace />
 
@@ -37,8 +29,6 @@ export function LoginPage() {
         </p>
 
         <div className="mt-12 max-w-md space-y-6 text-sm leading-relaxed text-slate-300">
-
-
           <p className="text-xs text-slate-400">
             Designed to support future GCP, CTRI, DPDP and regulatory
             workflows. This prototype is not a claim of legal or clinical
@@ -52,10 +42,6 @@ export function LoginPage() {
           <p className="text-xs font-semibold tracking-[0.24em] text-teal">
             AIIA
           </p>
-
-          <h2 className="mt-2 text-2xl font-semibold text-navy">
-            Sign in to the research workspace
-          </h2>
 
           <h2 className="mt-2 text-2xl font-semibold text-navy">
             Sign in to the research workspace
@@ -108,3 +94,8 @@ export function LoginPage() {
               Sign In
             </Button>
           </form>
+        </div>
+      </section>
+    </div>
+  )
+}
