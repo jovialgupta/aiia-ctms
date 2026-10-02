@@ -184,22 +184,13 @@ app = FastAPI(
 )
 
 
-
 app.add_middleware(
-
     CORSMiddleware,
-
-   allow_origins=[
-    "https://aiia-ctms-eta.vercel.app",
-    "https://aiia-ctms-3vp9t8e9c-jovialguptas-projects.vercel.app",
-],
-
+    allow_origins=settings.cors_origin_list,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
-
     allow_methods=["*"],
-
     allow_headers=["*"],
-
 )
 
 
