@@ -1,15 +1,12 @@
 import { GlobalSearch } from '@/components/layout/GlobalSearch'
 import { alerts } from '@/data/alerts'
 import { useAuth } from '@/hooks/useAuth'
-import type { Role } from '@/types'
 import { Bell, LogOut, Menu } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const roles: Role[] = ['Principal Investigator', 'Study Coordinator', 'Administrator']
-
 export function Header({ onMenu }: { onMenu: () => void }) {
-  const { user, switchRole, logout } = useAuth()
+  const { user, logout } = useAuth()
   const [openAlerts, setOpenAlerts] = useState(false)
   const openCount = alerts.filter((a) => a.status === 'Open').length
 
@@ -53,17 +50,11 @@ export function Header({ onMenu }: { onMenu: () => void }) {
             </div>
           )}
         </div>
-        <select
-          className="hidden h-10 rounded-lg border border-line bg-white px-2 text-xs font-medium text-ink md:block"
-          value={user?.role}
-          onChange={(e) => switchRole(e.target.value as Role)}
-        >
-          {roles.map((role) => (
-            <option key={role} value={role}>
-              {role}
-            </option>
-          ))}
-        </select>
+        <div className="hidden h-10 items-center rounded-lg border border-line bg-white px-3 text-xs font-medium text-ink md:flex">
+          {user?.role
+            ?.replaceAll('_', ' ')
+            .replace(/\b\w/g, (c) => c.toUpperCase())}
+        </div>
         <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-navy text-xs font-semibold text-white">
             {user?.initials}

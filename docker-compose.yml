@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16
+    container_name: aiia-ctms-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-aiia_ctms}
+      POSTGRES_USER: ${POSTGRES_USER:-aiia}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-aiia_ctms_dev}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - aiia_ctms_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-aiia} -d ${POSTGRES_DB:-aiia_ctms}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  aiia_ctms_pgdata:
