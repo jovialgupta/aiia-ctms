@@ -57,9 +57,9 @@ export function LoginPage() {
             Sign in to the research workspace
           </h2>
 
-          <p className="mt-2 text-sm text-muted">
-            Institute staff prototype access.
-          </p>
+          <h2 className="mt-2 text-2xl font-semibold text-navy">
+            Sign in to the research workspace
+          </h2>
 
           <form
             className="mt-6 space-y-4"
@@ -68,7 +68,7 @@ export function LoginPage() {
 
               try {
                 await login(email, password)
-                toast.success(`Signed in as ${role}`)
+                toast.success('Signed in successfully')
               } catch (error) {
                 toast.error(
                   error instanceof Error
@@ -104,49 +104,7 @@ export function LoginPage() {
               />
             </div>
 
-            <div>
-              <Label htmlFor="role">Role</Label>
-
-              <select
-                id="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value as Role)}
-                className="h-10 w-full rounded-lg border border-line bg-white px-3 text-sm"
-              >
-                {roles.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div>
-
             <Button className="w-full" type="submit">
               Sign In
             </Button>
-
-            <Button
-              className="w-full"
-              type="button"
-              variant="secondary"
-              onClick={async () => {
-                try {
-                  await login(email, password)
-                  toast.success(`Signed in as ${role}`)
-                } catch (error) {
-                  toast.error(
-                    error instanceof Error
-                      ? error.message
-                      : 'Login failed',
-                  )
-                }
-              }}
-            >
-              Demo Login
-            </Button>
           </form>
-        </div>
-      </section>
-    </div>
-  )
-}
