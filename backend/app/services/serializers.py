@@ -21,7 +21,7 @@ def to_study_out(study: Study) -> StudyOut:
     pi = study.principal_investigator
     coord = study.coordinator
     return StudyOut(
-        id=study.id,
+        id=study.study_id,
         study_id=study.study_id,
         title=study.title,
         description=study.description,
@@ -43,7 +43,6 @@ def to_study_out(study: Study) -> StudyOut:
         start_date=format_date(study.start_date),
         therapeutic_area=study.therapeutic_area,
     )
-
 
 def to_site_out(site: Site, study_code: str) -> SiteOut:
     progress = 0

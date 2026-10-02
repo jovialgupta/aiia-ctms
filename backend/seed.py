@@ -221,7 +221,7 @@ try:
             study = Study(
                 study_id=code,
                 title=title,
-                description=f"Phase 1 synthetic demo study: {title}.",
+                description=f"Synthetic clinical trial study: {title}.",
                 principal_investigator_id=pi.id,
                 coordinator_id=coordinator.id,
                 study_type=study_type,

@@ -37,29 +37,7 @@ export function LoginPage() {
         </p>
 
         <div className="mt-12 max-w-md space-y-6 text-sm leading-relaxed text-slate-300">
-          <p>
-            Phase 1 replaces fragmented spreadsheets and disconnected trackers
-            with a centralized view of AIIA’s clinical research portfolio.
-          </p>
 
-          <div className="rounded-xl border border-white/10 bg-white/5 p-5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Before
-            </p>
-
-            <p className="mt-1">
-              Spreadsheets + disconnected tools + delayed visibility
-            </p>
-
-            <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Phase 1 CTMS
-            </p>
-
-            <p className="mt-1">
-              Centralized dashboard + real-time KPIs + milestones + alerts +
-              audit history
-            </p>
-          </div>
 
           <p className="text-xs text-slate-400">
             Designed to support future GCP, CTRI, DPDP and regulatory

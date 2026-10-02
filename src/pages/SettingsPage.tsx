@@ -1,17 +1,6 @@
 import { Card } from '@/components/ui/Card'
 import { Check } from 'lucide-react'
 
-const future = [
-  'Pharmacovigilance',
-  'MedDRA / WHO Drug',
-  'FHIR R4',
-  'ABDM',
-  'EDC Integration',
-  'CDISC SDTM',
-  'CDISC ADaM',
-  'Define-XML',
-  'Advanced Safety Analytics',
-]
 
 export function SettingsPage() {
   return (
@@ -38,17 +27,6 @@ export function SettingsPage() {
         <p className="mt-3 text-xs text-muted">
           Prototype controls only. Designed to support future GCP, CTRI, DPDP and regulatory workflows.
         </p>
-      </Card>
-      <Card>
-        <h2 className="text-base font-semibold text-navy">Phase 2 / Future Integrations</h2>
-        <p className="mt-2 text-sm text-muted">Coming Soon:</p>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-          {future.map((item) => (
-            <li key={item} className="rounded-lg border border-dashed border-line bg-slate-50 px-3 py-2 text-sm text-muted">
-              {item}
-            </li>
-          ))}
-        </ul>
       </Card>
     </div>
   )

@@ -37,19 +37,31 @@ export function MilestonesPage() {
       <Card>
         <h2 className="text-base font-semibold text-navy">Upcoming deadlines</h2>
         <ul className="mt-4 divide-y divide-slate-100">
-          {complianceItems.map((item) => (
-            <li key={item.id}>
-              <Link to={`/studies/${item.studyId}`} className="flex items-start gap-3 py-3 hover:bg-slate-50">
-                <span className="mt-0.5">{icon[item.severity]}</span>
-                <div>
-                  <p className="font-medium text-ink">{item.title}</p>
-                  <p className="text-sm text-muted">{item.studyId} · due {item.dueDate}</p>
-                  <p className="mt-1 text-xs text-muted">{item.description}</p>
-                </div>
-                <Badge>{item.severity}</Badge>
-              </Link>
-            </li>
-          ))}
+          {complianceItems.map((item) => {
+            // Keep the existing milestone data/UI unchanged.
+            // The old milestone data may contain legacy study codes such as
+            // AIIA-AYU-2026-001, while the backend uses AIIA-CT-001.
+            // Convert only the route identifier used for navigation.
+            const studyNumber = item.studyId.match(/(\d{3})$/)?.[1]
+            const studyRouteId = studyNumber ? `AIIA-CT-${studyNumber}` : item.studyId
+
+            return (
+              <li key={item.id}>
+                <Link
+                  to={`/studies/${studyRouteId}`}
+                  className="flex items-start gap-3 py-3 hover:bg-slate-50"
+                >
+                  <span className="mt-0.5">{icon[item.severity]}</span>
+                  <div>
+                    <p className="font-medium text-ink">{item.title}</p>
+                    <p className="text-sm text-muted">{item.studyId} · due {item.dueDate}</p>
+                    <p className="mt-1 text-xs text-muted">{item.description}</p>
+                  </div>
+                  <Badge>{item.severity}</Badge>
+                </Link>
+              </li>
+            )
+          })}
         </ul>
       </Card>
     </div>
