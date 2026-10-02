@@ -189,7 +189,10 @@ app.add_middleware(
 
     CORSMiddleware,
 
-    allow_origins=["https://aiia-ctms-eta.vercel.app"],
+   allow_origins=[
+    "https://aiia-ctms-eta.vercel.app",
+    "https://aiia-ctms-3vp9t8e9c-jovialguptas-projects.vercel.app",
+],
 
     allow_credentials=True,
 
