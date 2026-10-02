@@ -50,7 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       login: async (email: string, password: string) => {
         const response = await fetch(
-          'http://localhost:8000/api/auth/login',
+          `${import.meta.env.VITE_API_URL}/api/auth/login`,
           {
             method: 'POST',
             headers: {
@@ -72,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         localStorage.setItem(TOKEN_KEY, data.access_token)
 
         const meResponse = await fetch(
-          'http://localhost:8000/api/auth/me',
+          `${import.meta.env.VITE_API_URL}/api/auth/me`,
           {
             headers: {
               Authorization: `Bearer ${data.access_token}`,
