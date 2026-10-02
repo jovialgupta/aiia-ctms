@@ -76,31 +76,82 @@ export function RecruitmentPage() {
         setLoading(true)
         setError('')
 
-        const [studyData, portfolioData] = await Promise.all([
-          apiFetch<Study[]>('/api/studies'),
-          apiFetch<PortfolioRecruitment>('/api/dashboard/recruitment'),
-        ])
+        // /api/studies is already role-aware:
+        // Administrator -> all studies
+        // PI -> assigned studies
+        // Coordinator -> assigned studies
+        const studyData = await apiFetch<Study[]>('/api/studies')
 
         setStudies(studyData)
-        setPortfolio(portfolioData)
 
-        const siteResults = await Promise.all(
+        // Load recruitment + sites for exactly the studies
+        // the current user is allowed to see.
+        const results = await Promise.all(
           studyData.map(async (study) => {
-            try {
-              return await apiFetch<Site[]>(
+            const [recruitment, studySites] = await Promise.all([
+              apiFetch<RecruitmentPoint[]>(
+                `/api/studies/${study.id}/recruitment`,
+              ),
+              apiFetch<Site[]>(
                 `/api/studies/${study.id}/sites`,
-              )
-            } catch (err) {
-              console.error(
-                `Failed to load sites for ${study.id}`,
-                err,
-              )
-              return []
+              ),
+            ])
+
+            return {
+              recruitment,
+              sites: studySites,
             }
           }),
         )
 
-        setSites(siteResults.flat())
+        // Aggregate recruitment history across the user's studies.
+        const monthlyMap = new Map<
+          string,
+          { month: string; planned: number; actual: number }
+        >()
+
+        results.forEach(({ recruitment }) => {
+          recruitment.forEach((item) => {
+            const existing = monthlyMap.get(item.month)
+
+            if (existing) {
+              existing.planned += item.planned
+              existing.actual += item.actual
+            } else {
+              monthlyMap.set(item.month, {
+                month: item.month,
+                planned: item.planned,
+                actual: item.actual,
+              })
+            }
+          })
+        })
+
+        const target = studyData.reduce(
+          (sum, study) => sum + (study.target ?? 0),
+          0,
+        )
+
+        const enrolled = studyData.reduce(
+          (sum, study) => sum + (study.enrolled ?? 0),
+          0,
+        )
+
+        const progress =
+          target > 0
+            ? Math.round((enrolled / target) * 1000) / 10
+            : 0
+
+        setPortfolio({
+          target,
+          enrolled,
+          progress,
+          monthly: Array.from(monthlyMap.values()),
+        })
+
+        setSites(
+          results.flatMap((result) => result.sites),
+        )
       } catch (err) {
         console.error(err)
         setError('Unable to load recruitment data.')
