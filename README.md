@@ -120,7 +120,7 @@ The application maintains the same overall interface for different roles while r
 
 ---
 
-## System Architecture
+ ## System Architecture
 
                   ┌─────────────────────────┐
                   │     React Frontend      │
@@ -140,3 +140,49 @@ The application maintains the same overall interface for different roles while r
                   │    PostgreSQL / Neon    │
                   │     Persistent Data     │
                   └─────────────────────────┘
+                      
+# Demo User Accounts
+
+The system includes the following demo accounts for testing authentication and role-based access control.
+
+| Name | Email | Password | Role |
+|---|---|---|---|
+| Administrator | `admin@aiia-ctms.local` | `AIIA@123` | Administrator |
+| Ananya | `ananya@aiia-ctms.local` | `AIIA@123` | Principal Investigator (PI) |
+| Priya | `priya@aiia-ctms.local` | `AIIA@123` | Study Coordinator |
+
+### Administrator
+
+**Email:** `admin@aiia-ctms.local`  
+**Password:** `AIIA@123`  
+**Role:** Administrator
+
+The Administrator has access to all clinical studies and associated research data.
+
+### Ananya
+
+**Email:** `ananya@aiia-ctms.local`  
+**Password:** `AIIA@123`  
+**Role:** Principal Investigator (PI)
+
+Ananya has access to the clinical studies assigned to her as Principal Investigator.
+
+### Priya
+
+**Email:** `priya@aiia-ctms.local`  
+**Password:** `AIIA@123`  
+**Role:** Study Coordinator
+
+Priya has access to the clinical studies assigned to her as Study Coordinator.
+
+> These credentials are provided for development/demo purposes only and should not be used as production credentials.
+
+
+
+                  
+                  
+                  
+                  
+                  
+                      
+                      
