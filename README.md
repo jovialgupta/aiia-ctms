@@ -1,8 +1,9 @@
 # AIIA Clinical Trial Management System (CTMS)
 
-A web-based Clinical Trial Management System prototype developed for the **All India Institute of Ayurveda (AIIA)**.
+A web-based Clinical Trial Management System prototype developed for the **All India Institute of Ayurveda (AIIA)**.**[Open AIIA CTMS](https://aiia-ctms-eta.vercel.app/)**
 
 The platform provides a centralized workspace for managing clinical studies, recruitment, milestones, compliance, alerts, users, and audit activity.
+
 
 ---
 
